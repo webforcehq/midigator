@@ -1,60 +1,32 @@
 <?php
 
-namespace WebforceHQ\OrderDesk;
+namespace WebforceHQ\Midigator;
 
-
-use WebforceHQ\OrderDesk\Requests\TestRequest;
-use WebforceHQ\OrderDesk\Requests\OrderRequest;
-use WebforceHQ\OrderDesk\Requests\ShipmentRequest;
-use WebforceHQ\OrderDesk\Requests\MoveOrderRequest;
-use WebforceHQ\OrderDesk\Requests\OrderItemRequest;
-use WebforceHQ\OrderDesk\Requests\OrderHistoryRequest;
-use WebforceHQ\OrderDesk\Requests\InventoryItemsRequest;
+use WebforceHQ\Midigator\Requests\SubscriptionRequest;
+use WebforceHQ\Midigator\Requests\AuthRequest;
 
 class Client
 {
-    protected $storeId;
-    protected $apikey;
+    protected $username;
+    protected $password;
+    protected $secret;
 
-    public function __construct($storeId, $apikey)
-    {
-        $this->storeId = $storeId;
-        $this->apikey  = $apikey;
+    protected $env;
+
+    public function __construct($username, $password, $secret, $env="SANDBOX"){
+        $this->username = $username;
+        $this->password = $password;
+        $this->secret   = $secret;
+        $this->setEnv($env);
     }    
 
-    public function isOrderDeskOnline()
-    {
-        return (new TestRequest($this->storeId, $this->apikey))->test();
+    private function setEnv($env){
+        $this->env = $env;
+        return $this;
     }
 
-    public function inventoryItemsApi()
-    {
-        return new InventoryItemsRequest($this->storeId, $this->apikey);
-    }
-
-    public function moveOrderApi()
-    {
-        return new MoveOrderRequest($this->storeId, $this->apikey);
-    }
-
-    public function ordersApi()
-    {
-        return new OrderRequest($this->storeId, $this->apikey);
-    }
-
-    public function orderHistoryApi()
-    {
-        return new OrderHistoryRequest($this->storeId, $this->apikey);
-    }
-
-    public function orderItemsApi()
-    {
-        return new OrderItemRequest($this->storeId, $this->apikey);
-    }
-
-    public function shipmentsApi()
-    {
-        return new ShipmentRequest($this->storeId, $this->apikey);
+    public function subscriptionsApi(){
+        return new SubscriptionRequest($this->username, $this->password, $this->secret, $this->env);
     }
 
 }

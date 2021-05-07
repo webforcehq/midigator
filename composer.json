@@ -1,6 +1,6 @@
 {
-    "name": "webforcehq/order-desk",
-    "description": "PHP SDK that consumes the API services from https://www.orderdesk.com/",
+    "name": "webforcehq/midigator",
+    "description": "PHP SDK that consumes the API services from https://midigator.com/",
     "license": "MIT",
     "authors": [
         {
@@ -17,15 +17,15 @@
     },
     "autoload": {
         "psr-4": {
-            "WebforceHQ\\OrderDesk\\": "src/",
-            "WebforceHQ\\OrderDesk\\Models\\": "src/models/",
-            "WebforceHQ\\OrderDesk\\Requests\\": "src/requests/",
-            "WebforceHQ\\OrderDesk\\Exceptions\\": "src/exceptions/"
+            "WebforceHQ\\Midigator\\": "src/",
+            "WebforceHQ\\Midigator\\Models\\": "src/models/",
+            "WebforceHQ\\Midigator\\Requests\\": "src/requests/",
+            "WebforceHQ\\Midigator\\Exceptions\\": "src/exceptions/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "WebforceHQ\\OrderDesk\\": "tests/"
+            "WebforceHQ\\Midigator\\": "tests/"
         }
     }
 }
