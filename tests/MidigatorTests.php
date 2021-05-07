@@ -16,9 +16,9 @@ class MidigatorTests extends TestCase
 
     protected function setUp(): void
     {
-        $this->username = "kvogt@webforcehq.com";
-        $this->password = "Pinkorchid96";
-        $this->secret   = "ryJqt0l7duqpSyaXW9IJcMGANNEeHWUIvSSM/o/RmV/SxC7M9wG+sCc7LQzUAbzLObWQSwdfHSqflaJJG4+K+Q==";
+        $this->username = "<Your username>";
+        $this->password = "<Your password>";
+        $this->secret   = "<Yout secret>";
     }
 
     public function testDeleteSubscriptionSuccessfully(){
