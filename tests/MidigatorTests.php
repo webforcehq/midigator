@@ -16,9 +16,9 @@ class MidigatorTests extends TestCase
 
     protected function setUp(): void
     {
-        $this->username = "kvogt@webforcehq.com";
-        $this->password = "Pinkorchid96";
-        $this->secret   = "ryJqt0l7duqpSyaXW9IJcMGANNEeHWUIvSSM/o/RmV/SxC7M9wG+sCc7LQzUAbzLObWQSwdfHSqflaJJG4+K+Q==";
+        $this->username = "";
+        $this->password = "";
+        $this->secret   = "";
     }
 
     public function testDeleteSubscriptionSuccessfully(){
@@ -102,7 +102,7 @@ class MidigatorTests extends TestCase
         $eventGuid = $event->guid;
         $subscription = new Subscription();
         $subscription->setEmail("jdoe@mail.com");
-        $subscription->setUrl("https://demo103/webhooks/midigator");
+        $subscription->setUrl("https://demo/webhooks/midigator");
         $subscription->setActive(TRUE);
         $response = $subscriptions->update($eventGuid, $subscription);
         $this->assertTrue($response->success); 
