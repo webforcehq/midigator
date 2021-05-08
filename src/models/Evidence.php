@@ -22,7 +22,7 @@ class Note extends MidigatorModel{
      */ 
     public function setProof(array $proofs)
     {
-        $this->allObjectsAreValidClass(['Proof'],$proofs);
+        $this->allObjectsAreValidClass([Proof::class],$proofs);
         $this->proof = $proofs;
 
         return $this;
@@ -43,7 +43,7 @@ class Note extends MidigatorModel{
      */ 
     public function setShippingDetails(array $shipping_details)
     {
-        $this->allObjectsAreValidClass(['ShippingDetails'],$shipping_details);
+        $this->allObjectsAreValidClass([ShippingDetails::class],$shipping_details);
         $this->shipping_details = $shipping_details;
 
         return $this;

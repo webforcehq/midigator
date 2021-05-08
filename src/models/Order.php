@@ -643,7 +643,7 @@ class Order extends MidigatorModel
      */ 
     public function setItems(array $items)
     {
-        $this->allObjectsAreValidClass(['Item'],$items);
+        $this->allObjectsAreValidClass([Item::class],$items);
         $this->items = $items;
         return $this;
     }
@@ -663,7 +663,7 @@ class Order extends MidigatorModel
      */ 
     public function setEvidence(array $evidences)
     {
-        $this->allObjectsAreValidClass(['Evidence'],$evidences);
+        $this->allObjectsAreValidClass([Evidence::class],$evidences);
         $this->evidence = $evidences;
 
         return $this;
@@ -684,7 +684,7 @@ class Order extends MidigatorModel
      */ 
     public function setNotes(array $notes)
     {
-        $this->allObjectsAreValidClass(['Evidence'],$notes);
+        $this->allObjectsAreValidClass([Note::class],$notes);
         $this->notes = $notes;
 
         return $this;
