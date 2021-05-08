@@ -50,7 +50,6 @@ class MidigatorTests extends TestCase
         $subscription->setType("chargeback.new");
         $response = $subscriptions->addNew($subscription);
         $this->assertTrue($response->success);  
-        sleep(2);
     }
 
     public function testEventsSuccessfully(){
@@ -61,7 +60,6 @@ class MidigatorTests extends TestCase
             $response = $subscriptions->test($event);
             $this->assertTrue($response->success); 
         }
-        sleep(2);
     }
 
     public function testListAllSubscriptionsSuccessfully(){
@@ -69,8 +67,8 @@ class MidigatorTests extends TestCase
         $client = new Client($this->username, $this->password, $this->secret);
         $subscriptions = $client->subscriptionsApi();
         $response = $subscriptions->listAll();
+        var_dump($response);
         $this->assertTrue($response->success);  
-        sleep(2);
     }
 
     public function testSubscribeConfirmationSuccessfully(){
@@ -86,7 +84,6 @@ class MidigatorTests extends TestCase
         $eventGuid = $eventToConfirm->guid;
         $response = $subscriptions->confirmation($eventGuid);
         $this->assertTrue($response->success); 
-        sleep(2); 
     }
 
     public function testUpdateConfirmationSuccessfully(){
@@ -101,12 +98,11 @@ class MidigatorTests extends TestCase
         $event = $subscriontionsList[rand(0, count($subscriontionsList) - 1)];
         $eventGuid = $event->guid;
         $subscription = new Subscription();
-        $subscription->setEmail("jdoe@mail.com");
-        $subscription->setUrl("https://demo/webhooks/midigator");
-        $subscription->setActive(TRUE);
+        // $subscription->setEmail("jdoe@mail.com");
+        // $subscription->setUrl("https://demo/webhooks/midigator");
+        $subscription->setActive(false);
         $response = $subscriptions->update($eventGuid, $subscription);
         $this->assertTrue($response->success); 
-        sleep(2); 
     }
 
     public function testDeleteSubscriptionSuccessfullyClear(){

@@ -8,11 +8,6 @@ use WebforceHQ\Midigator\Models\MidigatorModel;
 class Subscription extends MidigatorModel
 {
 
-    protected $email;
-    protected $url;
-    protected $event_type;
-    protected $active;
-
 
     /**
      * Get the value of email

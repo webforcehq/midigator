@@ -44,12 +44,9 @@ class MidigatorRequest
         return $this;
     }
 
-
     private function resolveUrl(){
         return $this->env === "PRODUCTION" ? self::LIVE_URL : self::SANDBOX_URL;
     }
-
-
 
     private function getClient($params = null)
     {

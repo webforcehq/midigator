@@ -2,6 +2,7 @@
 
 namespace WebforceHQ\Midigator;
 
+use WebforceHQ\Midigator\Requests\OrderRequest;
 use WebforceHQ\Midigator\Requests\SubscriptionRequest;
 use WebforceHQ\Midigator\Requests\AuthRequest;
 
@@ -27,6 +28,10 @@ class Client
 
     public function subscriptionsApi(){
         return new SubscriptionRequest($this->username, $this->password, $this->secret, $this->env);
+    }
+
+    public function ordersApi(){
+        return new OrderRequest($this->username, $this->password, $this->secret, $this->env);
     }
 
 }
