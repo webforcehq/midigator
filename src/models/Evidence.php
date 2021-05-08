@@ -4,6 +4,9 @@ namespace WebforceHQ\Midigator\Models;
 
 class Note extends MidigatorModel{
 
+    protected $shipping_details = [];
+    protected $proof = [];
+
     /**
      * Get the value of proof
      */ 
@@ -20,7 +23,7 @@ class Note extends MidigatorModel{
     public function setProof(array $proofs)
     {
         $this->allObjectsAreValidClass(['Proof'],$proofs);
-        $this->proof = $proof;
+        $this->proof = $proofs;
 
         return $this;
     }

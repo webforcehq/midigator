@@ -31,10 +31,10 @@ class MidigatorOrderTests extends TestCase{
         
         $order->setEmail("jane@example.com");
         $order->setPhone("555-254-4925");//HIGHLY RECOMMENDED
-        //$order->setRefunded(true);//HIGHLY RECOMMENDED
-        //$order->setRefundedAmount(1030);//HIGHLY RECOMMENDED
-        //$order->setSubscriptionCycle(3);//HIGHLY RECOMMENDED
-        //$order->setSubscriptionParentId("56");
+        $order->setRefunded(true);//HIGHLY RECOMMENDED
+        $order->setRefundedAmount(1030);//HIGHLY RECOMMENDED
+        $order->setSubscriptionCycle(3);//HIGHLY RECOMMENDED
+        $order->setSubscriptionParentId("56");
         $order->setIpAddress("192.168.133.7");
         $order->setProcessorAuthCode("741256");
         $order->setProcessorTransactionId("NMI0983");

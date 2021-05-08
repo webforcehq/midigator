@@ -4,7 +4,9 @@ namespace WebforceHQ\Midigator\Models;
 
 class Order extends MidigatorModel
 {
-
+    protected $evidence = [];
+    protected $items = [];
+    protected $notes = [];
 
     /**
      * Get the value of order_id
@@ -626,4 +628,65 @@ class Order extends MidigatorModel
         return $this;
     }
 
+    /**
+     * Get the value of items
+     */ 
+    public function getItems()
+    {
+        return $this->items;
+    }
+
+    /**
+     * Set the value of items
+     *
+     * @return  self
+     */ 
+    public function setItems(array $items)
+    {
+        $this->allObjectsAreValidClass(['Item'],$items);
+        $this->items = $items;
+        return $this;
+    }
+
+    /**
+     * Get the value of evidence
+     */ 
+    public function getEvidence()
+    {
+        return $this->evidence;
+    }
+
+    /**
+     * Set the value of evidence
+     *
+     * @return  self
+     */ 
+    public function setEvidence(array $evidences)
+    {
+        $this->allObjectsAreValidClass(['Evidence'],$evidences);
+        $this->evidence = $evidences;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of notes
+     */ 
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * Set the value of notes
+     *
+     * @return  self
+     */ 
+    public function setNotes(array $notes)
+    {
+        $this->allObjectsAreValidClass(['Evidence'],$notes);
+        $this->notes = $notes;
+
+        return $this;
+    }
 }
