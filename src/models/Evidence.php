@@ -2,7 +2,7 @@
 
 namespace WebforceHQ\Midigator\Models;
 
-class Note extends MidigatorModel{
+class Evidence extends MidigatorModel{
 
     protected $shipping_details = [];
     protected $proof = [];
