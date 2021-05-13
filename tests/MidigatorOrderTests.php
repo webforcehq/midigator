@@ -3,7 +3,10 @@
 
 use PHPUnit\Framework\TestCase;
 use WebforceHQ\Midigator\Client;
+use WebforceHQ\Midigator\Models\Evidence;
 use WebforceHQ\Midigator\Models\Order;
+use WebforceHQ\Midigator\Models\Proof;
+use WebforceHQ\Midigator\Models\ShippingDetails;
 
 class MidigatorOrderTests extends TestCase{
     
@@ -12,11 +15,12 @@ class MidigatorOrderTests extends TestCase{
         $this->username = "";
         $this->password = "";
         $this->secret   = "";
+        $this->orderId = 11;
     }
 
     public function testAddNew(){
         $order = new Order();
-        $order->setOrderId("1"); //REQUIRED
+        $order->setOrderId(strval($this->orderId)); //REQUIRED
         $order->setOrderDate("2019-09-30T09:20:11Z"); //REQUIRED
         $order->setMid("189250002");//REQUIRED
         $order->setCurrency("USD");//REQUIRED
@@ -47,10 +51,69 @@ class MidigatorOrderTests extends TestCase{
         $order->setBillingPostcode("48201");
         $order->setBillingCountry("US");
         $order->setMarketingSource("Facebook 234");//SOURCE
-        
+
+       
         $client = new Client($this->username, $this->password, $this->secret);
         $orders = $client->ordersApi();
         $response = $orders->addNew($order);
+    
+        $this->assertTrue($response->success);
+    }
+
+    public function testUpdateOrder(){
+
+        $order = new Order();
+        $order->setOrderId(strval($this->orderId)); //REQUIRED
+        $order->setOrderDate("2019-09-30T09:20:11Z"); //REQUIRED
+        $order->setMid("189250002");//REQUIRED
+        $order->setCurrency("USD");//REQUIRED
+        $order->setCardBrand("visa");//REQUIRED
+        $order->setCardLast4("1883");//REQUIRED
+
+        $shippingAddress = new ShippingDetails();
+
+        //ADDING EVIDENCE
+        $shippingAddress->setCarrier("UPS");
+        $shippingAddress->setTrackingNumber("8798791823723987");
+        $shippingAddress->setFirstName("Jhon");
+        $shippingAddress->setLastName("Doe");
+        $shippingAddress->setStreetAddress1("1 Main St");
+        $shippingAddress->setStreetAddress2("");
+        $shippingAddress->setCity("San Jose");
+        $shippingAddress->setState("CA");
+        $shippingAddress->setPostcode("95131");
+        $shippingAddress->setCountry("US");
+        
+        $evidence = new Evidence();
+
+        $evidence->addShippingDetails($shippingAddress);
+        $order->setEvidence($evidence);
+
+        $proof = new Proof();
+        $proof->setType("login");
+        $proof->setValue("2021-05-10 13:45:56");
+        $evidence->addProof($proof);
+        $order->setEvidence($evidence);
+
+        $proof = new Proof();
+        $proof->setType("login_2");
+        $proof->setValue("2021-05-10 14:45:56");
+        $evidence->addProof($proof);
+        $order->setEvidence($evidence);
+
+        $proof = new Proof();
+        $proof->setType("login_3");
+        $proof->setValue("2021-05-10 15:45:56");
+        $evidence->addProof($proof);
+        $order->setEvidence($evidence);
+
+        //SENDING ORDER
+        $client = new Client($this->username, $this->password, $this->secret);
+        $orders = $client->ordersApi();
+        $response = $orders->update($order);
+
+        echo json_encode($order);
+        var_dump($response);
         $this->assertTrue($response->success);
     }
 

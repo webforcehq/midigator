@@ -20,10 +20,10 @@ class Evidence extends MidigatorModel{
      *
      * @return  self
      */ 
-    public function setProof(array $proofs)
+    public function addProof($proof)
     {
-        $this->allObjectsAreValidClass([Proof::class],$proofs);
-        $this->proof = $proofs;
+        $this->allObjectsAreValidClass([Proof::class],[$proof]);
+        $this->proof[] = $proof;
 
         return $this;
     }
@@ -41,10 +41,10 @@ class Evidence extends MidigatorModel{
      *
      * @return  self
      */ 
-    public function setShippingDetails(array $shipping_details)
+    public function addShippingDetails($shipping_details)
     {
-        $this->allObjectsAreValidClass([ShippingDetails::class],$shipping_details);
-        $this->shipping_details = $shipping_details;
+        $this->allObjectsAreValidClass([ShippingDetails::class],[$shipping_details]);
+        $this->shipping_details[] = $shipping_details;
 
         return $this;
     }

@@ -2,11 +2,10 @@
 
 namespace WebforceHQ\Midigator\Models;
 
+use WebforceHQ\Midigator\Exceptions\CardBrandException;
+
 class Order extends MidigatorModel
 {
-    protected $evidence = [];
-    protected $items = [];
-    protected $notes = [];
 
     /**
      * Get the value of order_id
@@ -83,6 +82,10 @@ class Order extends MidigatorModel
      */ 
     public function setCardBrand($card_brand)
     {
+        $validBrands = [ "visa" , "mastercard" , "american_express" , "discover" , "diners" , "elo" , "paypal" , "jcb" ];
+        if( ! in_array($card_brand,$validBrands) ){
+            throw new CardBrandException("${card_brand} is not a valid parameter for a card brand");
+        }
         $this->card_brand = $card_brand;
 
         return $this;
@@ -661,9 +664,9 @@ class Order extends MidigatorModel
      *
      * @return  self
      */ 
-    public function setEvidence(array $evidences)
+    public function setEvidence($evidences)
     {
-        $this->allObjectsAreValidClass([Evidence::class],$evidences);
+        $this->allObjectsAreValidClass([Evidence::class],[$evidences]);
         $this->evidence = $evidences;
 
         return $this;
@@ -682,10 +685,10 @@ class Order extends MidigatorModel
      *
      * @return  self
      */ 
-    public function setNotes(array $notes)
+    public function addNote($note)
     {
-        $this->allObjectsAreValidClass([Note::class],$notes);
-        $this->notes = $notes;
+        $this->allObjectsAreValidClass([Note::class],[$note]);
+        $this->notes[] = $note;
 
         return $this;
     }
