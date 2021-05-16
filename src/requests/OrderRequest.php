@@ -27,4 +27,9 @@ class OrderRequest extends MidigatorRequest
         return $this->post(self::ENDPOINT,$order->toArray())->sendRequest();
     }
 
+    public function fetch(string $orderGuid){
+        $endpoint = self::ENDPOINT."/".$orderGuid;
+        return $this->get($endpoint)->sendRequest();
+    }
+
 }

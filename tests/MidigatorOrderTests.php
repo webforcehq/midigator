@@ -8,6 +8,8 @@ use WebforceHQ\Midigator\Models\Order;
 use WebforceHQ\Midigator\Models\Proof;
 use WebforceHQ\Midigator\Models\ShippingDetails;
 
+use function GuzzleHttp\json_encode;
+
 class MidigatorOrderTests extends TestCase{
     
     protected function setUp(): void
@@ -15,7 +17,7 @@ class MidigatorOrderTests extends TestCase{
         $this->username = "";
         $this->password = "";
         $this->secret   = "";
-        $this->orderId = 11;
+        $this->orderId = uniqid();
     }
 
     public function testAddNew(){
@@ -56,7 +58,7 @@ class MidigatorOrderTests extends TestCase{
         $client = new Client($this->username, $this->password, $this->secret);
         $orders = $client->ordersApi();
         $response = $orders->addNew($order);
-    
+        echo json_encode($response);
         $this->assertTrue($response->success);
     }
 
@@ -69,6 +71,7 @@ class MidigatorOrderTests extends TestCase{
         $order->setCurrency("USD");//REQUIRED
         $order->setCardBrand("visa");//REQUIRED
         $order->setCardLast4("1883");//REQUIRED
+        $order->setOrderAmount(1030);//HIGHLY RECOMMENDED
 
         $shippingAddress = new ShippingDetails();
 
@@ -112,8 +115,6 @@ class MidigatorOrderTests extends TestCase{
         $orders = $client->ordersApi();
         $response = $orders->update($order);
 
-        echo json_encode($order);
-        var_dump($response);
         $this->assertTrue($response->success);
     }
 
